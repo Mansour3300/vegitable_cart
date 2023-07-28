@@ -24,7 +24,8 @@ class BasketItemResource extends JsonResource
             'count'=>$this->count,
             'price/kilo'=>$data->price_kilo,
             'product_name'=>$data->product_name,
-            'image'=>$data->image
+            // 'image'=>$data->image
+            'image'=>asset('storage/'.$data->image)
 
         ];
     }

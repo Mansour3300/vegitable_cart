@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $all = Order::where('status',['binding','preparation','in_delivery'])->get();
+        $all = Order::where('status',['binding','preparing','in_delivery'])->get();
         $order = OrderResource::collection($all);
         return response()->json(['success'=>'true','current orders'=>$order]);
     }
@@ -63,8 +63,8 @@ class OrderController extends Controller
     {
         $request->validated();
         $update = Order::findorfail($id);
-        if($request->status == 'preparation'){
-            $update->update(['status'=>'preparation']);
+        if($request->status == 'preparing'){
+            $update->update(['status'=>'preparing']);
             $order = Order::where('id',$id)->first();
             $user1 = User::where('id',$order->user_id)->first();
             // dd($user1);
@@ -76,7 +76,13 @@ class OrderController extends Controller
             $user1 = User::where('id',$order->user_id)->first();
             // dd($user1);
             $user1->notify(new OrderNotification($order));
-            return response()->json(['success'=>'true','message'=>'your order is in delivery']);
+        }elseif($request->status == 'ready'){
+            $update->update(['status'=>'ready']);
+            $order = Order::where('id',$id)->first();
+            $user1 = User::where('id',$order->user_id)->first();
+            // dd($user1);
+            // $user1->notify(new OrderNotification($order));
+            return response()->json(['success'=>'true','message'=>'your order is ready']);
         }
     }
 

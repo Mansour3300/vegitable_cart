@@ -97,7 +97,7 @@ class BasketController extends Controller
     /***
      *
      */
-     public function total_price(Request $request){
+     public function total_price(){
         $basket_items = DB::table('basket_items')
                             ->join('products','products.id','=','basket_items.product_id')
                             ->select('basket_items.*','products.price_kilo')

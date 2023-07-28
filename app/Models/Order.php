@@ -13,6 +13,8 @@ class Order extends Model
     protected $guarded = ['created_at','updated_at'];
     protected $casts = ['details'=>'array'];
 
-   
+    public function ordr(){
+        return $this->belongsTo(User::class);
+    }
 
 }

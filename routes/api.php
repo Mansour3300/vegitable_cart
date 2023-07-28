@@ -12,7 +12,10 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\DriverAuthController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\DriverOrderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -134,6 +137,33 @@ Route::group([
     Route::post('favorite/store',[FavoriteController::class,'store'])->middleware('auth');
     Route::get('favorite/index',[FavoriteController::class,'index'])->middleware('auth');
     Route::get('favorite/delete/{id}',[FavoriteController::class,'destroy'])->middleware('auth');
+
+
+
+    /*------------------------------------------------------------------------------------------------------*/
+
+
+    Route::post('driver/register', [DriverAuthController::class,'driverRegister']);
+    Route::post('driver/car', [DriverAuthController::class,'car']);
+    Route::post('driver/code', [DriverAuthController::class,'verifyphone']);
+    Route::post('driver/login', [DriverAuthController::class,'driverLogin']);
+    Route::get('driver/info',[DriverAuthController::class,'driverinfo'])->middleware('auth:driver');
+    Route::get('driver/logout', [DriverAuthController::class,'logout'])->middleware('auth:driver');
+    Route::post('driver/forgotpass', [DriverAuthController::class,'forgot']);
+    Route::post('driver/resetcode', [DriverAuthController::class,'resetcode']);
+    Route::post('driver/resetpass', [DriverAuthController::class,'resetpass']);
+    Route::post('driver/updateinfo',[DriverAuthController::class,'updateinfo'])->middleware('auth:driver');
+    Route::post('driver/updatecar', [DriverAuthController::class,'updatecar'])->middleware('auth:driver');
+    Route::get('notificaton',[DriverAuthController::class,'notification'])->middleware('auth:driver');
+
+
+
+    /*------------------------------------------------------------------------------------------------------*/
+
+
+    Route::get('driver/all', [DriverOrderController::class,'allOrders'])->middleware('auth:driver');
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -19,6 +19,7 @@ class OrderResource extends JsonResource
         // return parent::toArray($request);
         // $basket = Basket::where('user_id',auth()->id())->first();
         return [
+            'order_id'=>$this->id,
             'total_price'=>$this->total_price,
             'code'=>$this->order_code,
             'status'=>$this->status,

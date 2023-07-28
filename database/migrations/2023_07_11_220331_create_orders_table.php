@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignid('user_id')->constraind('users')->cascadeondelete();
             // $table->foreignid('basket_id')->constraind('baskets')->cascadeondelete();
-            $table->enum('status',['binding','preparation','in_delivery','canceled','finished'])->default('binding');
+            $table->enum('status',['binding','preparing','in_delivery','canceled','finished','ready'])->default('binding');
             $table->string('total_price');
             $table->string('order_code');
             $table->json('details')->nullable();
