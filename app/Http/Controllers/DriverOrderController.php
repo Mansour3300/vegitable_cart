@@ -70,7 +70,7 @@ class DriverOrderController extends Controller
     public function payedMoney(PayRequest $request,$id){
         $request->validated();
         $payed = Order::findorfail($id);
-        $payed->update(['payed'=>$request->validated()]);
+        $payed->update(['payed'=>$request->payed]);
         return response()->json(['success'=>'true','message'=>'you added payed money for order']);
     }
 }
