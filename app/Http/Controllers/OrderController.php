@@ -18,9 +18,11 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() //note orders fo auth user
     {
-        $all = Order::where('status',['binding','preparing','in_delivery'])->get();
+        $all = Order::where('user_id',auth()->id())->
+                      where('status',['binding','preparing','in_delivery'])
+                      ->get();
         $order = OrderResource::collection($all);
         return response()->json(['success'=>'true','current orders'=>$order]);
     }

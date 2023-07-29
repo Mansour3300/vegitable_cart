@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DriverOrderResource;
 
 class DriverOrderController extends Controller
 {
     public function allOrders(){
-        $orders = Order::where('status','ready')->orwhere('status','preparing')->first();
-        $orders->ordr();
-        // dd($data);
-        return response()->json(['status'=>'success','data'=>$orders]);
+        $users = DB::table('users')
+                             ->join('orders','user_id','users.id')
+                             ->select('orders.*','user_name')
+                             ->where('status','ready')
+                             ->orwhere('status','preparing')
+                             ->get();
+        // dd($users);
+        $data = DriverOrderResource::collection($users);
+        return response()->json(['status'=>'success','data'=>$data]);
     }
+
+    /*---------------------------------------------------------------------------------------*/
 }
