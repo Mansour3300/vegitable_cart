@@ -167,12 +167,12 @@ public function driverLogin(DrivrLoginRequest $request){
         }
     /*---------------------------------------------------------------------------------------*/
 
-    public function notification(){
-        $user = auth()->user();
-        $not = $user->notifications;
-        $noty = NotificationResource::collection($not);
-        return response()->json(['status'=>'success','data'=>$noty]);
-    }
+    // public function notification(){
+    //     $user = auth()->user();
+    //     $not = $user->notifications;
+    //     $noty = NotificationResource::collection($not);
+    //     return response()->json(['status'=>'success','data'=>$noty]);
+    // }
 }
 
 

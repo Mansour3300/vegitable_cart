@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignid('user_id')->constraind('users')->cascadeondelete();
-            // $table->foreignid('basket_id')->constraind('baskets')->cascadeondelete();
+            $table->foreignid('driver_id')->constraind('drivers')->cascadeondelete()->nullable();
             $table->enum('status',['binding','preparing','in_delivery','canceled','finished','ready'])->default('binding');
             $table->string('total_price');
             $table->string('order_code');

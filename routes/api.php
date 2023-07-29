@@ -154,7 +154,7 @@ Route::group([
     Route::post('driver/resetpass', [DriverAuthController::class,'resetpass']);
     Route::post('driver/updateinfo',[DriverAuthController::class,'updateinfo'])->middleware('auth:driver');
     Route::post('driver/updatecar', [DriverAuthController::class,'updatecar'])->middleware('auth:driver');
-    Route::get('notificaton',[DriverAuthController::class,'notification'])->middleware('auth:driver');
+    Route::get('driver/notificaton',[DriverAuthController::class,'notification'])->middleware('auth:driver');
 
 
 
@@ -162,6 +162,8 @@ Route::group([
 
 
     Route::get('driver/all', [DriverOrderController::class,'allOrders'])->middleware('auth:driver');
+    Route::get('driver/pick/{id}', [DriverOrderController::class,'pickOrder'])->middleware('auth:driver');
+    Route::get('driver/update/{id}', [DriverOrderController::class,'updateStatus'])->middleware('auth:driver');
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
