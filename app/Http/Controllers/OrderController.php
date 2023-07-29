@@ -72,12 +72,6 @@ class OrderController extends Controller
             // dd($user1);
             $user1->notify(new OrderNotification($order));
             return response()->json(['success'=>'true','message'=>'your order is in preparation']);
-        // }elseif($request->status == 'in delivery'){
-        //     $update->update(['status'=>'in_delivery']);
-        //     $order = Order::where('id',$id)->first();
-        //     $user1 = User::where('id',$order->user_id)->first();
-        //     // dd($user1);
-        //     $user1->notify(new OrderNotification($order));
         }elseif($request->status == 'ready'){
             $update->update(['status'=>'ready']);
             $order = Order::where('id',$id)->first();

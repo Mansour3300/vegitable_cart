@@ -164,6 +164,7 @@ Route::group([
     Route::get('driver/all', [DriverOrderController::class,'allOrders'])->middleware('auth:driver');
     Route::get('driver/pick/{id}', [DriverOrderController::class,'pickOrder'])->middleware('auth:driver');
     Route::get('driver/update/{id}', [DriverOrderController::class,'updateStatus'])->middleware('auth:driver');
+    Route::get('driver/pay/{id}', [DriverOrderController::class,'payedMoney'])->middleware('auth:driver');
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignid('driver_id')->constraind('drivers')->cascadeondelete()->nullable();
             $table->enum('status',['binding','preparing','in_delivery','canceled','finished','ready'])->default('binding');
             $table->string('total_price');
+            $table->string('payed')->nullable();
             $table->string('order_code');
             $table->json('details')->nullable();
             $table->string('address');

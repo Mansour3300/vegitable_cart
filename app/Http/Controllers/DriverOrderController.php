@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OrderRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Driver\PayRequest;
 use App\Notifications\OrderNotification;
 use App\Http\Resources\DriverOrderResource;
 use App\Http\Requests\Driver\PickOrderRequest;
@@ -66,5 +67,10 @@ class DriverOrderController extends Controller
     /*-------------------------------------------------------------------------------------------*/
 
 
-    
+    public function payedMoney(PayRequest $request,$id){
+        $request->validated();
+        $payed = Order::findorfail($id);
+        $payed->update(['payed'=>$request->validated()]);
+        return response()->json(['success'=>'true','message'=>'you added payed money for order']);
+    }
 }
