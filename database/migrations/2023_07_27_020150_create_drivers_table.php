@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('country_key');
             $table->enum('verify',['verified','not_verified'])->default('not_verified');
             $table->integer('otp_code')->unique();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->timestamps();
         });
     }

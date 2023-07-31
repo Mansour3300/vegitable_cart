@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OrderRequest;
@@ -65,12 +66,35 @@ class DriverOrderController extends Controller
 
 
     /*-------------------------------------------------------------------------------------------*/
-
+                                        // cash money
 
     public function payedMoney(PayRequest $request,$id){
         $request->validated();
         $payed = Order::findorfail($id);
         $payed->update(['payed'=>$request->payed]);
         return response()->json(['success'=>'true','message'=>'you added payed money for order']);
+    }
+
+
+    /*-------------------------------------------------------------------------------------------- */
+
+
+    public function driverlocation(){
+        $orders = Order::get();
+            foreach($orders as $order){
+                $lat = Order::first()->latitude;
+                $lon = Order::first()->longitude;
+                $driver = Driver::select("drivers.id",
+                                      DB::raw("6371 * acos(cos(radians(" . $lat . "))
+                                      *cos(radians(drivers.latitude))
+                                      *cos(radians(drivers.longitude) - radians(" .$lon . "))
+                                      + sin(radians(" .$lat. "))
+                                      *sin(radians(drivers.latitude))) AS distance"))
+                            ->first();
+            if($driver->distance >= 500){
+                return $orders;
+            }
+                            // dd($driver->distance);
+    }
     }
 }

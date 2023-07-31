@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('payment');
             $table->date('delivery_date');
             $table->time('delivery_time');
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->timestamps();
         });
     }
